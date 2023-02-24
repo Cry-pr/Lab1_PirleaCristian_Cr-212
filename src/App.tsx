@@ -19,7 +19,7 @@ return (
         <p>
           <b >First Name: Pirlea <br />
           Last Name: Cristian <br />
-          Grouo: Cr-212</b>
+          Group: Cr-212</b>
         </p>
       </div>
 
