@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ant-menu-vertical {
+  border-right: none;
+  width: 200px;
+  height: 100%;
+}
+
+
+
+.ant-menu-submenu .ant-menu-item {
+  width: 100%;
+}
+
+.site-layout-content {
+  margin-left: 200px;
+  height: 100%;
+}
+
+.box{
+  padding-left: 20px;
+  padding-top: 20px;
+
+}
+
+.side-nav{
+  width: 250px;
+  height: 90%;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  padding: 10px 10px;
+  
+}
+
+.menu1{
+  border-radius: 10px;
+
+}
+
+.card-list{
+  display: flex;
+  overflow-x:scroll;
+   height: 400px;
+}
+
+.card-form{
+  flex-grow: 0;
+   margin-right: 20px;
+  transition: transform 0.2s ease-in-out;
+}
+
+.card-form:last-child{
+  margin-right: o;
+}
+
+.card-form:hover{
+  transform: scale(1.05);
+}
+.layout{
+  height: 100%;
+}
+cards.map{
+  padding: 200px;
+}
+
