@@ -11,3 +11,29 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.ceva{
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+
+}
+.object{
+  margin-top: 10%;
+  width: 200px;
+  border: 1px solid green;
+  padding: 50px;
+  margin: 1px;
+}
+.title{
+  text-align: center;
+}
+.ion{
+  display: flex;
+  flex-direction: row;
+}
