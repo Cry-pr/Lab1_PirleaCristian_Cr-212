@@ -1,123 +1,86 @@
-import React, { useState } from "react";
-import { Layout, Menu, Card, Form, Input, Button } from "antd";
-import "./App.css";
+import React, { useState, useEffect } from "react";
 
-
-const { Header, Content } = Layout;
-
-type CardType = {
-  title: string;
-  description: string;
-  image: string;
-};
-
-
-
-
-
-const initialCards: CardType[] = [
-  {
-    title: "Card 1",
-    description: "This is card 1",
-    image: "https://picsum.photos/id/0/200",
-  },
-  {
-    title: "Card 2",
-    description: "This is card 2",
-    image: "https://picsum.photos/id/10/200",
-  },
-  {
-    title: "Card 3",
-    description: "This is card 3",
-    image: "https://picsum.photos/id/20/200",
-  },
+const UserInitial = [
+    { username: "nicu", password: "123" },
+    { username: "ion", password: "1234" },
+    { username: "vasile", password: "12345" },
 ];
 
-const App: React.FC = () => {
-  const [cards, setCards] = useState(initialCards);
+const App = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [EsteLogat, setEsteLogat] = useState(false);
+    const [users, SetareUser] = useState(UserInitial);
 
- 
+    useEffect(() => {
+        const storedUsers = localStorage.getItem("users");
+        if (storedUsers) {
+            SetareUser([...users, ...JSON.parse(storedUsers)]);
+        }
+    }, [users]);
 
-  const onFinish = (values: any) => {
-    const { name, email, password } = values;
-    const newCard = {
-      title: name, 
-      description: email,
-      image: `https://picsum.photos/seed/${name}/200`,
+    const handleLogin = (event: { preventDefault: () => void; }) => {
+        event.preventDefault();
+        const foundUser = users.find(
+            (user) => user.username === username && user.password === password
+        );
+        if (foundUser) {
+            setEsteLogat(true);
+            localStorage.setItem("EsteLogat", "true");
+            localStorage.setItem("user", JSON.stringify(foundUser));
+            alert("Autentificare reușită");
+        } else {
+            alert("Login eșuat");
+        }
     };
-    setCards([newCard,...cards ]);
-    console.log(values);
-    alert("Esti urat, dar pentru mama, tot urat esti!");
-  };
 
 
-  return (
-   
-    <Layout className="layout">
-   <Header >
-    <a href="#link" className="box">Acasa</a>
-    <a href="#link" className="box">Dupa Casa</a>
-    <a href="#link" className="box">In Inima Ta</a>
-    <a href="#link" className="box">Dincolo</a>
-    <a href="#link" className="box">Bun</a>
-    </Header>
-  <div className="side-nav">
-  <Menu className="menu1" theme="dark" mode="vertical"  defaultOpenKeys={["sub1"]}>
-    <Menu.SubMenu key="sub1" title="Fete">
-      <Menu.Item key="1">Fete-frumoase</Menu.Item>
-      <Menu.Item key="2">Nu chear</Menu.Item>
-    </Menu.SubMenu>
-    <Menu.SubMenu key="sub2" title="Money">
-      <Menu.Item key="3">Bani usori</Menu.Item>
-      <Menu.Item key="4">1XBET</Menu.Item>
-    </Menu.SubMenu>
-       <Menu.SubMenu key="sub3" title="Peste Hotare">
-      <Menu.Item key="5">La Briceni</Menu.Item>
-      <Menu.Item key="6">Nu te duce</Menu.Item>
-     </Menu.SubMenu>
-      </Menu>
-      </div>
+    const handleLogout = () => {
+        setEsteLogat(false);
+        localStorage.setItem("EsteLogat", "false");
+        alert("Succes la deconectare");
+    };
 
-      <Content style={{ padding: "4% 50px",height: "100%" }}>
-        <div className="site-layout-content">
-        <div className="card-list">
-  {cards.map((card) => (
-    <Card className="card-form"
-      key={card.title}
-      hoverable
-      style={{ width: "240px", margin: "16px" }}
-      cover={<img alt={card.title} src={card.image} />}
-    >
-      <Card.Meta
-        title={card.title}
-        description={card.description}
-      />
-    </Card>
-  ))}
-</div>
-          <Form onFinish={onFinish}>
-  <Form.Item label="Name" name="name" initialValue="Scrie ceva ...">
-    <Input />
-  </Form.Item>
-  <Form.Item label="Email" name="email" initialValue="Scrie ceva ...">
-    <Input />
-  </Form.Item>
-  <Form.Item label="Password" name="password">
-    <Input.Password />
-  </Form.Item>
-  <Form.Item>
-    <Button type="primary" htmlType="submit">
-      Submit
-    </Button>
-  </Form.Item>
-</Form>
-          
-        </div>
-      </Content>
+    const renderLoginForm = () => {
+        return (
 
-    </Layout>
-   
-  );
+            <form onSubmit={handleLogin}>
+                <label>
+                    Username:
+                    <input
+                        type="text"
+                        value={username}
+                        onChange={(event) => setUsername(event.target.value)}
+                    />
+                </label>
+                <br />
+                <label>
+                    Password:
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(event) => setPassword(event.target.value)}
+                    />
+                </label>
+                <br />
+                <button type="submit">Autentificare</button>
+            </form>
+        );
+    };
+
+    const renderLogoutButton = () => {
+        const storedUser = localStorage.getItem("user");
+        const loggedInUser = storedUser ? JSON.parse(storedUser) : null;
+        return (
+            <div>
+                {loggedInUser && <p>User : {loggedInUser.username}</p>}
+                <button onClick={handleLogout}>Ieșire</button>
+            </div>
+        );
+    };
+
+
+    return <div>{EsteLogat ? renderLogoutButton() : renderLoginForm()}</div>;
 };
 
 export default App;

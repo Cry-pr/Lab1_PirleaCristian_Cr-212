@@ -101,3 +101,15 @@ cards.map{
   padding: 200px;
 }
 
+.input {
+  padding-top:20px ;
+  
+  display: flex;
+  justify-content:first baseline;
+  
+}
+
+.cont{
+  padding: 4% 7%;
+  height: 100%;
+}
