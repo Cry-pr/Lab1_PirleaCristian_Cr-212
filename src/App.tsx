@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
 const UserInitial = [
-    { username: "nicu", password: "123" },
-    { username: "ion", password: "1234" },
-    { username: "vasile", password: "12345" },
+    { username: "a", password: "1" },
+    { username: "b", password: "2" },
+    { username: "c", password: "3" },
 ];
 
 const App = () => {
@@ -28,43 +28,51 @@ const App = () => {
             setEsteLogat(true);
             localStorage.setItem("EsteLogat", "true");
             localStorage.setItem("user", JSON.stringify(foundUser));
-            alert("Autentificare reușită");
+            
         } else {
             alert("Login eșuat");
         }
     };
-
+ 
 
     const handleLogout = () => {
         setEsteLogat(false);
         localStorage.setItem("EsteLogat", "false");
-        alert("Succes la deconectare");
+        
     };
 
     const renderLoginForm = () => {
         return (
 
+          
             <form onSubmit={handleLogin}>
-                <label>
-                    Username:
-                    <input
+
+<div className="center">
+		<h1 >Log In</h1>
+		
+		  <div className="inputbox">
+			<input
                         type="text"
                         value={username}
                         onChange={(event) => setUsername(event.target.value)}
                     />
-                </label>
-                <br />
-                <label>
-                    Password:
-                    <input
+			<span>Email</span>
+		  </div>
+		  <div className="inputbox">
+      <input
                         type="password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                     />
-                </label>
-                <br />
-                <button type="submit">Autentificare</button>
-            </form>
+			<span>Password</span>
+		  </div>
+		  <div className="button">
+			<button className="btn" type="submit">submit</button>
+		  </div>
+		
+	  </div>
+    </form>
+                
         );
     };
 
@@ -74,7 +82,7 @@ const App = () => {
         return (
             <div>
                 {loggedInUser && <p>User : {loggedInUser.username}</p>}
-                <button onClick={handleLogout}>Ieșire</button>
+                <button className="btn" onClick={handleLogout}>Ieșire</button>
             </div>
         );
     };
